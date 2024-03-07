@@ -7,6 +7,8 @@ services:
       APP_PORT: 3000
 
   nostrcheck_server:
+    networks:
+      - localnet
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     stop_grace_period: 1m
@@ -23,6 +25,8 @@ services:
       DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
 
   mariadb:
+    networks:
+      - localnet
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -34,6 +38,8 @@ services:
       MYSQL_PASSWORD: nostrcheck
 
   redis:
+    networks:
+      - localnet
     image: redis:6
     volumes:
       - "${APP_DATA_DIR}/redis:/data"
@@ -54,3 +60,5 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
+networks:
+  localnet:
