@@ -7,7 +7,6 @@ services:
     environment:
       APP_HOST: nostrcheck_server_1
       APP_PORT: 3000
-      PROXY_AUTH_ADD: "false"
 
   nostrcheck_server:
     networks:
