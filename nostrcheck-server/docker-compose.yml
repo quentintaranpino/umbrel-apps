@@ -1,60 +1,22 @@
-version: '3.7'
+version: "3.7"
 
 services:
   app_proxy:
     environment:
-      APP_HOST: app_1
+      APP_HOST: nostrudel_web_1
       APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
 
-  app:
-    image: nostrcheckme/nostrcheck-server:latest
-    build: .
+  cors:
+    image: ghcr.io/hzrd149/docker-cors-anywhere:0.4.5@sha256:641f5ea3265acbc339a03a72b79cd942c4bedab9b1c8b3fc13e5f3f087f649e6
+    environment:
+      CORSANYWHERE_REQUIRE_HEADERS: "host"
+  web:
+    image: ghcr.io/hzrd149/nostrudel:0.38.3@sha256:cda4e5964e2f24f118547189819465682997fe8b3d6e0b688a3ae0685fed00da
     restart: on-failure
     stop_grace_period: 1m
-    volumes:
-      - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
-      - "${APP_DATA_DIR}/media:/usr/src/app/media"
-      - "./resources:/usr/src/app/resources"
+    init: true
+    depends_on:
+      - cors
     environment:
-      WAIT_HOSTS: redis:6379
-      WAIT_HOSTS_TIMEOUT: 300
-      WAIT_SLEEP_INTERVAL: 30
-      WAIT_HOST_CONNECT_TIMEOUT: 30
-      DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
-      DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
-    command: sh -c "/wait && npm run start"
-
-  mariadb:
-    image: mariadb:10
-    volumes:
-      - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
-    restart: always
-    environment:
-      MYSQL_ROOT_PASSWORD: nostrcheck
-      MYSQL_DATABASE: nostrcheck
-      MYSQL_USER: nostrcheck
-      MYSQL_PASSWORD: nostrcheck
-
-  redis:
-    image: redis:6
-    volumes:
-      - "${APP_DATA_DIR}/redis:/data"
-    restart: always
-    healthcheck:
-      test: ["CMD", "redis-cli", "ping"]
-      interval: 30s
-      timeout: 10s
-      retries: 5
-
-  traefik:
-    image: traefik:2.10
-    command:
-      - "--api.insecure=true"
-      - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
-      - "--providers.docker.exposedbydefault=false"
-    ports:
-      - "8081:80"
-    volumes:
-      - "/var/run/docker.sock:/var/run/docker.sock"
-    restart: always
+      CORS_PROXY: cors:8080
