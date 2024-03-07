@@ -5,7 +5,11 @@ name: Nostrcheck server
 version: "0.5.0"
 tagline: A set of tools to interact with nostr and be sovereign of your data.
 description: >-
-Nostrcheck server is a set of tools to interact with nostr and be sovereign of your data. 
+Nostrcheck server is a set of tools to interact with nostr and be sovereign of your data.
+
+It allows to validate nostr address (NIP05), multimedia uploads (NIP94, NIP96), nostr notes integrity check and lightning redirects. All under NIP98 authentication 100% nostr compatible.
+
+The server can be installed anywhere and allows anyone to become a nostr service provider.
 releaseNotes: ""
 developer: quentintaranpino
 website: https://github.com/quentintaranpino/nostrcheck-api-ts
@@ -21,4 +25,4 @@ path: ""
 defaultUsername: ""
 defaultPassword: ""
 submitter: quentintaranpino
-submission: https://github.com/getumbrel/umbrel-apps/pull/9999999999
+submission: https://github.com/getumbrel/umbrel-apps/pull/99
