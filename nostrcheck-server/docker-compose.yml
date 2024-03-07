@@ -3,16 +3,20 @@ version: "3.7"
 services:
   app_proxy:
     environment:
-      APP_HOST: app_1
-      APP_PORT: 3000
-  app:
-    image: nostrcheckme/nostrcheck-server:latest
-    build: .
+      APP_HOST: nostrudel_web_1
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  cors:
+    image: ghcr.io/hzrd149/docker-cors-anywhere:0.4.5@sha256:641f5ea3265acbc339a03a72b79cd942c4bedab9b1c8b3fc13e5f3f087f649e6
+    environment:
+      CORSANYWHERE_REQUIRE_HEADERS: "host"
+  web:
+    image: ghcr.io/hzrd149/nostrudel:0.38.3@sha256:cda4e5964e2f24f118547189819465682997fe8b3d6e0b688a3ae0685fed00da
     restart: on-failure
     stop_grace_period: 1m
-    ports:
-      - "3000:3000"
-    volumes:
-      - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
-      - "${APP_DATA_DIR}/media:/usr/src/app/media"
-      - "./resources:/usr/src/app/resources"
+    init: true
+    depends_on:
+      - cors
+    environment:
+      CORS_PROXY: cors:8080
