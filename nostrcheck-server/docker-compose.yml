@@ -1,0 +1,62 @@
+version: '3.7'
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: app_1
+      APP_PORT: 3000
+
+  app:
+    image: nostrcheckme/nostrcheck-server:app
+    build: .
+    restart: on-failure
+    stop_grace_period: 1m
+    ports:
+      - "3000:3000"
+    volumes:
+      - ${APP_DATA_DIR}/tmp:/usr/src/app/tmp
+      - ${APP_DATA_DIR}/media:/usr/src/app/media
+      - ./resources:/usr/src/app/resources
+    environment:
+      WAIT_HOSTS: redis:6379
+      WAIT_HOSTS_TIMEOUT: 300
+      WAIT_SLEEP_INTERVAL: 30
+      WAIT_HOST_CONNECT_TIMEOUT: 30
+      DEVICE_HOSTNAME: ${DEVICE_HOSTNAME}
+      DEVICE_DOMAIN_NAME: ${DEVICE_DOMAIN_NAME}
+    command: sh -c "/wait && npm run start"
+
+  mariadb:
+    image: mariadb:10
+    volumes:
+      - ${APP_DATA_DIR}/mysql:/var/lib/mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: nostrcheck
+      MYSQL_DATABASE: nostrcheck
+      MYSQL_USER: nostrcheck
+      MYSQL_PASSWORD: nostrcheck
+
+  redis:
+    image: redis:6
+    volumes:
+      - ${APP_DATA_DIR}/redis:/data
+    restart: always
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
+
+  traefik:
+    image: traefik:2.10
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--entrypoints.web.address=:80"
+      - "--providers.docker.exposedbydefault=false"
+    ports:
+      - "8081:80"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+    restart: always
