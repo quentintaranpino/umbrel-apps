@@ -5,7 +5,6 @@ services:
     environment:
       APP_HOST: app_1
       APP_PORT: 3000
-      PROXY_AUTH_ADD: "false"
 
   app:
     image: nostrcheckme/nostrcheck-server:latest
@@ -15,22 +14,27 @@ services:
     ports:
       - "3000:3000"
     volumes:
-      - ${APP_DATA_DIR}/tmp:/usr/src/app/tmp
-      - ${APP_DATA_DIR}/media:/usr/src/app/media
-      - ./resources:/usr/src/app/resources
+      - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
+      - "${APP_DATA_DIR}/media:/usr/src/app/media"
+      - "./resources:/usr/src/app/resources"
     environment:
       WAIT_HOSTS: redis:6379
       WAIT_HOSTS_TIMEOUT: 300
       WAIT_SLEEP_INTERVAL: 30
       WAIT_HOST_CONNECT_TIMEOUT: 30
-      DEVICE_HOSTNAME: ${DEVICE_HOSTNAME}
-      DEVICE_DOMAIN_NAME: ${DEVICE_DOMAIN_NAME}
+      DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
+      DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
+      TOR_PROXY_IP: "${TOR_PROXY_IP}"
+      TOR_PROXY_PORT: "${TOR_PROXY_PORT}"
+      APP_HIDDEN_SERVICE: "${APP_HIDDEN_SERVICE}"
+      APP_PASSWORD: "${APP_PASSWORD}"
+      APP_SEED: "${APP_SEED}"
     command: sh -c "/wait && npm run start"
 
   mariadb:
     image: mariadb:10
     volumes:
-      - ${APP_DATA_DIR}/mysql:/var/lib/mysql
+      - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: nostrcheck
@@ -41,7 +45,7 @@ services:
   redis:
     image: redis:6
     volumes:
-      - ${APP_DATA_DIR}/redis:/data
+      - "${APP_DATA_DIR}/redis:/data"
     restart: always
     healthcheck:
       test: ["CMD", "redis-cli", "ping"]
