@@ -4,14 +4,12 @@ services:
   app_proxy:
     environment:
       APP_HOST: nostrcheck_server_1
-      APP_PORT: 3001
+      APP_PORT: 3000
 
   server:
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     stop_grace_period: 1m
-    ports:
-      - "3001:3000"
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
