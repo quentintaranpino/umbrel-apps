@@ -10,8 +10,6 @@ services:
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     stop_grace_period: 1m
-    ports:
-      - "4891:3000"
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
