@@ -15,7 +15,7 @@ services:
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
-      - "./resources:/usr/src/app/resources"
+      - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
     environment:
       WAIT_HOSTS: redis:6379
       WAIT_HOSTS_TIMEOUT: 300
