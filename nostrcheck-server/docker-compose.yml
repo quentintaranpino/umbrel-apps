@@ -3,13 +3,15 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: nostrcheck_server_app_1
-      APP_PORT: 80
+      APP_HOST: app_1
+      APP_PORT: 3000
   app:
     image: nostrcheckme/nostrcheck-server:latest
     build: .
     restart: on-failure
     stop_grace_period: 1m
+    ports:
+      - "3000:3000"
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
@@ -21,11 +23,6 @@ services:
       WAIT_HOST_CONNECT_TIMEOUT: 30
       DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
       DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
-      TOR_PROXY_IP: "${TOR_PROXY_IP}"
-      TOR_PROXY_PORT: "${TOR_PROXY_PORT}"
-      APP_HIDDEN_SERVICE: "${APP_HIDDEN_SERVICE}"
-      APP_PASSWORD: "${APP_PASSWORD}"
-      APP_SEED: "${APP_SEED}"
     command: sh -c "/wait && npm run start"
 
   mariadb:
