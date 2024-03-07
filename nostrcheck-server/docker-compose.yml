@@ -6,7 +6,7 @@ services:
       APP_HOST: nostrcheck_server_1
       APP_PORT: 3000
 
-  server:
+  nostrcheck_server:
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     stop_grace_period: 1m
