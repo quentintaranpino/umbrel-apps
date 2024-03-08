@@ -29,7 +29,6 @@ services:
   mariadb:
     networks:
       - localnet
-    container_name: mariadb
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
