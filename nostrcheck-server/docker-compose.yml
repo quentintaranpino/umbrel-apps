@@ -10,6 +10,8 @@ services:
       - localnet
 
   nostrcheck_server:
+    depends_on:
+      - mariadb
     networks:
       - localnet
     image: nostrcheckme/nostrcheck-server:latest
