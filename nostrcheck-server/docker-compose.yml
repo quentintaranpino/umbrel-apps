@@ -7,8 +7,7 @@ services:
       APP_PORT: 3000
       PROXY_AUTH_ADD: "false"
     networks:
-      - localnet:
-        ipv4_address: nostrcheck_server_1
+      - localnet
 
   nostrcheck_server:
     networks:
@@ -29,8 +28,7 @@ services:
       DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
   mariadb:
     networks:
-      - localnet:
-        ipv4_address: mariadb
+      - localnet
     container_name: mariadb
     image: mariadb:10
     volumes:
@@ -43,8 +41,7 @@ services:
       MYSQL_PASSWORD: nostrcheck
   redis:
     networks:
-      - localnet:
-        ipv4_address: redis
+      - localnet
     image: redis:6
     volumes:
       - "${APP_DATA_DIR}/redis:/data"
@@ -66,7 +63,6 @@ services:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
     networks:
-      - localnet:
-        ipv4_address: traefik
+      - localnet
 networks:
   localnet:
