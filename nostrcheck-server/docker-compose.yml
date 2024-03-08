@@ -2,13 +2,16 @@ version: '3.7'
 
 services:
   app_proxy:
-    networks:
-      - localnet
     environment:
       APP_HOST: nostrcheck_server_1
       APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
+    networks:
+      - localnet
 
   nostrcheck_server:
+    depends_on:
+      - mariadb
     networks:
       - localnet
     image: nostrcheckme/nostrcheck-server:latest
@@ -25,7 +28,6 @@ services:
       WAIT_HOST_CONNECT_TIMEOUT: 30
       DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
       DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
-
   mariadb:
     networks:
       - localnet
@@ -38,7 +40,6 @@ services:
       MYSQL_DATABASE: nostrcheck
       MYSQL_USER: nostrcheck
       MYSQL_PASSWORD: nostrcheck
-
   redis:
     networks:
       - localnet
@@ -62,5 +63,7 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
+    networks:
+      - localnet
 networks:
   localnet:
