@@ -25,10 +25,10 @@ services:
       WAIT_HOST_CONNECT_TIMEOUT: 30
       DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
       DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
-
   mariadb:
     networks:
       - localnet
+    container_name: mariadb
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -38,7 +38,6 @@ services:
       MYSQL_DATABASE: nostrcheck
       MYSQL_USER: nostrcheck
       MYSQL_PASSWORD: nostrcheck
-
   redis:
     networks:
       - localnet
