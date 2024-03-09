@@ -1,5 +1,5 @@
 manifestVersion: 1
-id: nostrcheck-server
+id: nostrcheck_server
 category: social
 name: Nostrcheck server
 version: "0.5.0"
