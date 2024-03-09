@@ -7,7 +7,7 @@ services:
       APP_PORT: 8081
       PROXY_AUTH_ADD: "false"
   db:
-    image: louneskmt/dojo-db:1.5.0-low-mem@sha256:5af4f90818d55360e572033fcc493cd945143e7a3aaef91fa7e102f3c66c7a5b
+    image: jsurf/rpi-mariadb
     init: true
     restart: on-failure
     stop_grace_period: 5m
