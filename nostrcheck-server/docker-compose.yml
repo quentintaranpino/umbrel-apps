@@ -23,7 +23,6 @@ services:
     networks:
       default:
           ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
-          hostname: mariadb
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
