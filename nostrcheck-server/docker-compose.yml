@@ -2,6 +2,8 @@ version: '3.7'
 
 services:
   app_proxy:
+    networks:
+      - localnet
     environment:
       APP_HOST: nostrcheck_server_app_1
       APP_PORT: 3000
