@@ -21,8 +21,7 @@ services:
       - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
   mariadb:
     networks:
-      default:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
+      - default
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -35,8 +34,7 @@ services:
 
   redis:
     networks:
-      default:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_REDIS_IP
+      - default
     image: redis:6
     hostname: redis
     volumes:
@@ -50,8 +48,7 @@ services:
 
   traefik:
     networks:
-      default:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
+      - default
     image: traefik:2.10
     command:
       - "--api.insecure=true"
