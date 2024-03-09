@@ -3,9 +3,9 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: nostrcheck_server
+      APP_HOST: nostrcheck_server_app_1
       APP_PORT: 3000
-  server:
+  app:
     hostname: "${DEVICE_HOSTNAME}"
     networks:
       - localnet
