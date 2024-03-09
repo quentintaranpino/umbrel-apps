@@ -3,12 +3,9 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
+      APP_HOST: app
       APP_PORT: 3000
   app:
-    networks:
-      localnet:
-        ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
     depends_on:
       - mariadb
       - redis
@@ -20,9 +17,6 @@ services:
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
       - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
   mariadb:
-    networks:
-      localnet:
-        ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -33,9 +27,6 @@ services:
       MYSQL_USER: nostrcheck
       MYSQL_PASSWORD: nostrcheck
   redis:
-    networks:
-      localnet:
-        ipv4_address: $APP_NOSTRCHECK_SERVER_REDIS_IP
     image: redis:6
     hostname: redis
     volumes:
@@ -47,9 +38,6 @@ services:
       timeout: 10s
       retries: 5
   traefik:
-    networks:
-      localnet:
-        ipv4_address: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
     image: traefik:2.10
     command:
       - "--api.insecure=true"
@@ -59,8 +47,3 @@ services:
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
-networks:
-  localnet:
-    ipam:
-      config:
-      - subnet: 10.23.23.0/24
