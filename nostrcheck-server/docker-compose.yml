@@ -8,7 +8,7 @@ services:
   app:
     networks:
       default:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
+        ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
     depends_on:
       - mariadb
       - redis
@@ -59,3 +59,6 @@ services:
     restart: always
 networks:
   default:
+    ipam:
+      config:
+        - subnet: 10.21.23.0/24
