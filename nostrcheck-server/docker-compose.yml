@@ -2,15 +2,13 @@ version: '3.7'
 
 services:
   app_proxy:
-    ports: 
-      - "3101:3000"
     environment:
       APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
       APP_PORT: 3000
   app:
     networks:
       localnet:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
+        ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
     depends_on:
       - mariadb
       - redis
@@ -24,7 +22,7 @@ services:
   mariadb:
     networks:
       localnet:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
+        ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -34,11 +32,10 @@ services:
       MYSQL_DATABASE: nostrcheck
       MYSQL_USER: nostrcheck
       MYSQL_PASSWORD: nostrcheck
-
   redis:
     networks:
       localnet:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_REDIS_IP
+        ipv4_address: $APP_NOSTRCHECK_SERVER_REDIS_IP
     image: redis:6
     hostname: redis
     volumes:
@@ -49,11 +46,10 @@ services:
       interval: 30s
       timeout: 10s
       retries: 5
-
   traefik:
     networks:
       localnet:
-          ipv4_address: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
+        ipv4_address: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
     image: traefik:2.10
     command:
       - "--api.insecure=true"
