@@ -13,7 +13,7 @@ services:
       - mariadb
       - redis
     image: nostrcheckme/nostrcheck-server:testing
-    restart: never
+    restart: on-failure
     stop_grace_period: 1m
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
