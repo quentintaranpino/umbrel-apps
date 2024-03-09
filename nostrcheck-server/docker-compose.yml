@@ -3,7 +3,7 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: nostrcheck_server_1
+      APP_HOST: nostrcheck_server
       APP_PORT: 3000
   server:
     hostname: "${DEVICE_HOSTNAME}"
