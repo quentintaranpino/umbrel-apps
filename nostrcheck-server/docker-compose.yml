@@ -23,7 +23,7 @@ services:
     networks:
       default:
         ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
-    image: mariadb:11
+    image: mariadb:10.6
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
     restart: always
