@@ -3,7 +3,7 @@ version: '3.7'
 services:
   app_proxy:
   ports:
-    - "3101:3000"
+    port: "3101:3000"
     environment:
       APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
       APP_PORT: 3000
