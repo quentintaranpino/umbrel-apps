@@ -12,7 +12,7 @@ services:
     depends_on:
       - mariadb
       - redis
-    image: nostrcheckme/nostrcheck-server:latest
+    image: nostrcheckme/nostrcheck-server:testing
     restart: never
     stop_grace_period: 1m
     volumes:
