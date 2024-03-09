@@ -10,6 +10,8 @@ services:
     depends_on:
       - mariadb
       - redis
+    ports:
+    - "3000:3000"
     networks:
       - localnet
     image: nostrcheckme/nostrcheck-server:latest
