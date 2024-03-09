@@ -7,7 +7,8 @@ services:
       APP_PORT: 3000
   app:
     networks:
-      - default
+      default:
+          ipv4_address: $APP_NOSTRCHECK_SERVER_APP_IP
     depends_on:
       - mariadb
       - redis
