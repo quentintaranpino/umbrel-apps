@@ -3,7 +3,7 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: nostrcheck_server_app_1
+      APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
       APP_PORT: 3000
   app:
     networks:
@@ -23,6 +23,7 @@ services:
     networks:
       default:
           ipv4_address: $APP_NOSTRCHECK_SERVER_MARIADB_IP
+          hostname: mariadb
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
