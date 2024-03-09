@@ -5,6 +5,7 @@ services:
     environment:
       APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
       APP_PORT: 3000
+      PROXY_AUTH_ADD: "false"
   app:
     networks:
       default:
