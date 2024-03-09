@@ -2,14 +2,12 @@ version: '3.7'
 
 services:
   app_proxy:
-    networks:
-      - localnet
     environment:
       APP_HOST: nostrcheck_server_app_1
       APP_PORT: 3000
   app:
     networks:
-      - localnet
+      - default
     depends_on:
       - mariadb
       - redis
@@ -22,7 +20,7 @@ services:
       - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
   mariadb:
     networks:
-      - localnet
+      - default
     image: mariadb:10
     volumes:
       - "${APP_DATA_DIR}/mysql:/var/lib/mysql"
@@ -35,7 +33,7 @@ services:
 
   redis:
     networks:
-      - localnet
+      - default
     image: redis:6
     volumes:
       - "${APP_DATA_DIR}/redis:/data"
@@ -48,7 +46,7 @@ services:
 
   traefik:
     networks:
-      - localnet
+      - default
     image: traefik:2.10
     command:
       - "--api.insecure=true"
