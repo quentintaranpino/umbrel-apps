@@ -18,10 +18,6 @@ services:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
       - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
-    environment:
-      DEVICE_HOSTNAME: "${DEVICE_HOSTNAME}"
-      DEVICE_DOMAIN_NAME: "${DEVICE_DOMAIN_NAME}"
-
   mariadb:
     networks:
       - localnet
