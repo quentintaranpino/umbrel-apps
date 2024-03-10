@@ -25,7 +25,7 @@ services:
       REDIS_PORT: "6379"
       REDIS_USER: "default"
       REDIS_PASSWORD: ""
-     labels:
+    labels:
       - "traefik.enable=true"
       - "traefik.http.services.app.loadbalancer.server.port=3000"
       - "traefik.http.services.app.loadbalancer.sticky=true"
