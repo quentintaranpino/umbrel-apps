@@ -15,6 +15,7 @@ services:
       - redis
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
+    stop_grace_period: 1m
     environment: 
       DATABASE_HOST: $APP_NOSTRCHECK_SERVER_MARIADB_IP
       DATABASE_USER: "nostrcheck"
@@ -24,7 +25,36 @@ services:
       REDIS_PORT: "6379"
       REDIS_USER: "default"
       REDIS_PASSWORD: ""
-    stop_grace_period: 1m
+     labels:
+      - "traefik.enable=true"
+      - "traefik.http.services.app.loadbalancer.server.port=3000"
+      - "traefik.http.services.app.loadbalancer.sticky=true"
+      - "traefik.http.services.app.loadbalancer.sticky.cookie.name=app_session"
+      - "traefik.http.routers.app.entrypoints=web"
+      # /.well-known/nostr.json -> /api/v2/nostraddress
+      - "traefik.http.routers.app-nostrjson.rule=Path(`/.well-known/nostr.json`)"
+      - "traefik.http.routers.app-nostrjson.middlewares=replacepath-nostrjson"
+      - "traefik.http.middlewares.replacepath-nostrjson.replacepath.path=/api/v2/nostraddress"
+      - "traefik.http.routers.app-nostrjson.service=app"
+      # /.well-known/nostr/nip96.json -> /api/v2/nip96
+      - "traefik.http.routers.app-nip96.rule=Path(`/.well-known/nostr/nip96.json`)"
+      - "traefik.http.routers.app-nip96.middlewares=replacepath-nip96"
+      - "traefik.http.middlewares.replacepath-nip96.replacepath.path=/api/v2/nip96"
+      - "traefik.http.routers.app-nip96.service=app"
+      # /media -> /api/v2/media
+      - "traefik.http.routers.app-media.rule=PathPrefix(`/media`)"
+      - "traefik.http.routers.app-media.middlewares=replacepathregex-media"
+      - "traefik.http.middlewares.replacepathregex-media.replacepathregex.regex=^/media/(.*)"
+      - "traefik.http.middlewares.replacepathregex-media.replacepathregex.replacement=/api/v2/media/$$1"
+      - "traefik.http.routers.app-media.service=app"
+      # /.well-known/nostr.json -> /api/v2/nostraddress
+      - "traefik.http.routers.app.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.app.service=app"
+      # /.well-known/nostr.json -> /api/v2/lightning
+      - "traefik.http.routers.app-lightning.rule=Path(`/.well-known/lnurlp`)"
+      - "traefik.http.routers.app-lightning.middlewares=replacepath-lightning"
+      - "traefik.http.middlewares.replacepath-lightning.replacepath.path=/api/v2/lightningaddress"
+      - "traefik.http.routers.app-lightning.service=app"
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
