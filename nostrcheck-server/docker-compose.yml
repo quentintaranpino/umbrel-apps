@@ -16,7 +16,7 @@ services:
     image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     environment: 
-      DATABASE_HOST: "mariadb"
+      DATABASE_HOST: $APP_NOSTRCHECK_SERVER_MARIADB_IP
       DATABASE_USER: "nostrcheck"
       DATABASE_PASSWORD: "nostrcheck"
       DATABASE_DATABASE: "nostrcheck"
