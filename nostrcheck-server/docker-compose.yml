@@ -3,7 +3,7 @@ version: '3.7'
 services:
   app_proxy:
     environment:
-      APP_HOST: $APP_NOSTRCHECK_SERVER_APP_IP
+      APP_HOST: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
       APP_PORT: 3000
       PROXY_AUTH_ADD: "false"
   app:
@@ -13,13 +13,17 @@ services:
     depends_on:
       - mariadb
       - redis
-    image: nostrcheckme/nostrcheck-server:testing
+    image: nostrcheckme/nostrcheck-server:latest
     restart: on-failure
     environment: 
-      DATABASE_HOST: $APP_NOSTRCHECK_SERVER_MARIADB_IP
+      DATABASE_HOST: "mariadb"
       DATABASE_USER: "nostrcheck"
       DATABASE_PASSWORD: "nostrcheck"
       DATABASE_DATABASE: "nostrcheck"
+      REDIS_HOST: "redis"
+      REDIS_PORT: "6379"
+      REDIS_USER: "default"
+      REDIS_PASSWORD: ""
     stop_grace_period: 1m
     volumes:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
@@ -58,10 +62,9 @@ services:
         ipv4_address: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
     image: traefik:2.10
     command:
-      - "--api.insecure=true"
       - "--providers.docker=true"
-      - "--entrypoints.web.address=:80"
       - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:3000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
