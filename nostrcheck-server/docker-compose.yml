@@ -29,6 +29,7 @@ services:
       - "${APP_DATA_DIR}/tmp:/usr/src/app/tmp"
       - "${APP_DATA_DIR}/media:/usr/src/app/media"
       - "${APP_DATA_DIR}/resources:/usr/src/app/resources"
+      - "${APP_DATA_DIR}/config:/usr/src/app/config"
   mariadb:
     networks:
       default:
