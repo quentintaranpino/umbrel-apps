@@ -64,7 +64,7 @@ services:
     image: traefik:2.10
     command:
       - "--providers.docker=true"
-      - "--providers.docker.exposedbydefault=false"
+      - "--providers.docker.exposedbydefault=true"
       - "--entrypoints.web.address=:3000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
