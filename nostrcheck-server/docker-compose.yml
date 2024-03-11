@@ -13,7 +13,7 @@ services:
     depends_on:
       - mariadb
       - redis
-    image: nostrcheckme/nostrcheck-server:latest
+    image: nostrcheckme/nostrcheck-server:testing
     restart: on-failure
     stop_grace_period: 1m
     environment: 
