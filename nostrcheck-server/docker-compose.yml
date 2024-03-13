@@ -4,7 +4,7 @@ services:
   app_proxy:
     environment:
       APP_HOST: $APP_NOSTRCHECK_SERVER_TRAEFIK_IP
-      APP_PORT: 3000
+      APP_PORT: 443
       PROXY_AUTH_ADD: "false"
   app:
     networks:
@@ -30,7 +30,8 @@ services:
       - "traefik.http.services.app.loadbalancer.server.port=3000"
       - "traefik.http.services.app.loadbalancer.sticky=true"
       - "traefik.http.services.app.loadbalancer.sticky.cookie.name=app_session"
-      - "traefik.http.routers.app.entrypoints=web"
+      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.tls.certresolver=myresolver"
       # /.well-known/nostr.json -> /api/v2/nostraddress
       - "traefik.http.routers.app-nostrjson.rule=Path(`/.well-known/nostr.json`)"
       - "traefik.http.routers.app-nostrjson.middlewares=replacepath-nostrjson"
@@ -95,12 +96,13 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:3000"
-      - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge=true"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+      - "--certificatesresolvers.myresolver.acme.email=contact@nostrcheck.me"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "./dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
+      - "./letsencrypt:/letsencrypt"
     restart: always
-    labels:
-      - "traefik.http.routers.myrouter.rule=Host(`nostrcheck.local`)"
-      - "traefik.http.routers.myrouter.tls=true"
