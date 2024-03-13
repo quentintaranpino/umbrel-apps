@@ -96,6 +96,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:3000"
+      - "--log.level=DEBUG"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/letsencrypt/live/kamehouse.synology.me/fullchain.pem:/etc/ssl/certs/fullchain.pem"
