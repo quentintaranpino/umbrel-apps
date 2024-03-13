@@ -96,9 +96,17 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:3000"
+      - "--entrypoints.dashboard.address=:8080"
+      - "--api.insecure=true"
+      - "--api.dashboard=true"
+      - "--api.debug=true"
       - "--log.level=DEBUG"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/letsencrypt/live/kamehouse.synology.me/fullchain.pem:/etc/ssl/certs/fullchain.pem"
       - "/etc/letsencrypt/live/kamehouse.synology.me/privkey.pem:/etc/ssl/private/privkey.pem"
     restart: always
+    labels:
+      - "traefik.http.routers.dashboard.rule=PathPrefix(`/`)"
+      - "traefik.http.routers.dashboard.entrypoints=dashboard"
+      - "traefik.http.routers.dashboard.service=api@internal"
