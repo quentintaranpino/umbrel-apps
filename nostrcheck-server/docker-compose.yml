@@ -95,8 +95,7 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:80"
-      - "--entrypoints.websecure.address=:443"
+      - "--entrypoints.websecure.address=:3000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
       - "/etc/letsencrypt/live/kamehouse.synology.me/fullchain.pem:/etc/ssl/certs/fullchain.pem"
