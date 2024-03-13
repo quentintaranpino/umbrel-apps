@@ -30,7 +30,7 @@ services:
       - "traefik.http.services.app.loadbalancer.server.port=3000"
       - "traefik.http.services.app.loadbalancer.sticky=true"
       - "traefik.http.services.app.loadbalancer.sticky.cookie.name=app_session"
-      - "traefik.http.routers.app.entrypoints=websecure"
+      - "traefik.http.routers.app.entrypoints=web"
       # /.well-known/nostr.json -> /api/v2/nostraddress
       - "traefik.http.routers.app-nostrjson.rule=Path(`/.well-known/nostr.json`)"
       - "traefik.http.routers.app-nostrjson.middlewares=replacepath-nostrjson"
@@ -95,10 +95,7 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.websecure.address=:3000"
-      - "--log.level=DEBUG"
+      - "--entrypoints.web.address=:3000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
-      - "/etc/letsencrypt/live/kamehouse.synology.me/fullchain.pem:/etc/ssl/certs/fullchain.pem"
-      - "/etc/letsencrypt/live/kamehouse.synology.me/privkey.pem:/etc/ssl/private/privkey.pem"
     restart: always
