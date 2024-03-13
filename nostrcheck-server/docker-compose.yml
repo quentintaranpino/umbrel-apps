@@ -96,7 +96,7 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:3000"
-      - "--entrypoints.dashboard.address=:8080"
+      - "--entrypoints.dashboard.address=:3888"
       - "--api.insecure=true"
       - "--api.dashboard=true"
       - "--api.debug=true"
