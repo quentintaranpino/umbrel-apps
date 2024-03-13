@@ -95,7 +95,7 @@ services:
     command:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
-      - "--entrypoints.web.address=:3000"
+      - "--entrypoints.websecure.address=:3000"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
     restart: always
