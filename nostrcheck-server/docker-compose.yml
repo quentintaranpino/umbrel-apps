@@ -96,6 +96,11 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.websecure.address=:3000"
+      - "--providers.file.filename=/etc/traefik/dynamic_conf.yml"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./dynamic_conf.yml:/etc/traefik/dynamic_conf.yml"
     restart: always
+    labels:
+      - "traefik.http.routers.myrouter.rule=Host(`nostrcheck.local`)"
+      - "traefik.http.routers.myrouter.tls=true"
