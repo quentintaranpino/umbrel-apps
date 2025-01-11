@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_ADD: "false"
   
   web:
-    image: lnbits/lnbits:0.12.1@sha256:5e0cd330f8ce4c8d1145e90b073f321e6068d2b79b70a3029f72030ab626125a
+    image: lnbits/lnbits:v0.12.12@sha256:739512d10c10535bdb53ab363640f02f95e3f857b64af401d48991d3cf2e43a8
     init: true
     restart: on-failure
     stop_grace_period: 1m
@@ -33,4 +33,3 @@ services:
       LNBITS_DISABLED_EXTENSIONS: "amilk"
       LNBITS_ADMIN_EXTENSIONS: "ngrok"
       LNBITS_ADMIN_UI: "true"
-      SUPER_USER: "$APP_PASSWORD"

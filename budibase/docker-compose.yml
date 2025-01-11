@@ -1,0 +1,17 @@
+version: "3.7"
+
+services:
+  app_proxy:
+    environment:
+      APP_HOST: budibase_budibase_1
+      APP_PORT: 80
+      PROXY_AUTH_ADD: "false"
+
+  budibase:
+    image: budibase/budibase:3.2.34@sha256:0ac3723bd867c0a3d181ecbfd16bce97066b570b319ac65985b3dbea493dabfa
+    restart: on-failure
+    stop_grace_period: 1m
+    volumes:
+      - ${APP_DATA_DIR}/data/budibase:/data
+    environment:
+      JWT_SECRET: ${APP_SEED}

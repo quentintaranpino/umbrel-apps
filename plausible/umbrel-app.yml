@@ -1,0 +1,41 @@
+manifestVersion: 1
+id: plausible
+category: developer
+name: Plausible Analytics
+version: "2.1.4"
+tagline: Easy to use and privacy-friendly Google Analytics alternative
+description: >-
+  Plausible is intuitive, lightweight and open source web analytics.
+  No cookies and fully compliant with GDPR, CCPA and PECR.
+
+
+  ⚙️ You may need to expose Plausible to the web in order to use the app in its intended way with websites.
+  The easiest way to do this is to use the 'Cloudflare Tunnel' app from the Umbrel app store, and expose Plausible to the internet using your own domain.
+releaseNotes: >-
+  This release focuses on resolving file moving issues with CSV export/import and includes several improvements to enhance the user experience.
+
+
+  Key changes include:
+    - Added ability to review and revoke particular logged-in user sessions
+    - Added ability to change password from user settings screen
+    - Revised User Settings UI
+    - Default to invite-only for registration
+    - Fixed cross-device file move in CSV exports/imports
+
+
+  For full release notes, visit https://github.com/plausible/analytics/releases
+developer: Plausible Community Edition
+website: https://plausible.io/
+repo: https://github.com/plausible/analytics
+support: https://github.com/plausible/community-edition/issues
+port: 9092
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+path: ""
+defaultUsername: ""
+defaultPassword: ""
+dependencies: []
+submitter: ~dibref-labter
+submission: https://github.com/getumbrel/umbrel-apps/pull/1371

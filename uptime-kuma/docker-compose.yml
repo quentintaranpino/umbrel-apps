@@ -5,9 +5,10 @@ services:
     environment:
       APP_HOST: uptime-kuma_server_1
       APP_PORT: 3001
+      PROXY_AUTH_WHITELIST: "/api/*"
 
   server:
-    image: louislam/uptime-kuma:1.23.7@sha256:658b77607d872913cc1217e43e2288d35dd712c3d943c7c21fab0dfbd471b8ad
+    image: louislam/uptime-kuma:1.23.16@sha256:431fee3be822b04861cf0e35daf4beef6b7cb37391c5f26c3ad6e12ce280fe18
     restart: on-failure
     stop_grace_period: 1m
     volumes:

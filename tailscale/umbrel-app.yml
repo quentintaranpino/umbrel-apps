@@ -2,7 +2,7 @@ manifestVersion: 1
 id: tailscale
 category: networking
 name: Tailscale
-version: "v1.56.1"
+version: "v1.78.3"
 tagline: Zero config VPN to access your Umbrel from anywhere
 description: >-
   Tailscale is zero config VPN that creates a secure network between
@@ -10,10 +10,10 @@ description: >-
   subnets, Tailscale just works.
 
 
-  Tailscale will assign your Umbrel a stable IP and an auto-assigned domain that stays consistent, no matter what network your Umbrel is connected to. It’s like a local network that works everywhere.
+  Tailscale will assign your Umbrel a stable IP and an auto-assigned domain that stays consistent, no matter what network your Umbrel is connected to. It's like a local network that works everywhere.
 
 
-  Tailscale builds on top of WireGuard®’s Noise protocol encryption, a peer-reviewed and trusted standard.
+  Tailscale builds on top of WireGuard®'s Noise protocol encryption, a peer-reviewed and trusted standard.
 developer: Tailscale Inc.
 website: https://tailscale.com
 dependencies: []
@@ -27,15 +27,10 @@ gallery:
 path: ""
 deterministicPassword: false
 torOnly: false
-releaseNotes: |
-  This release updates Tailscale from v1.52.0 to v1.56.1 which includes: 
+releaseNotes: >-
+  This update introduces client metrics, system policy management improvements and multiple fixes.
   
-  - improve responsiveness under load, especially with bidirectional traffic
-  - improve UPnP portmapping
-  - add tailscale whois subcommand to observe metadata associated with a Tailscale IP
-  - include tailnet name and profile ID in tailscale switch --list to disambiguate profiles with common login names
-  - and many more improvements/fixes..
 
-  Full release notes and detailed information is available at https://github.com/tailscale/tailscale/releases
+  Full release notes are available at https://github.com/tailscale/tailscale/releases
 submitter: Umbrel
 submission: https://github.com/getumbrel/umbrel/pull/1248

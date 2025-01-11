@@ -2,7 +2,7 @@ version: "3.7"
 
 services:
   server:
-    image: esphome/esphome:2024.2.2@sha256:abdd0754b2aeb28aebb2a4fbd12d2fe38ae172f36d1232d6db70bee5eea39182
+    image: esphome/esphome:2024.12.2@sha256:b2c6322700acb67ecf14e6781d5ee953ee6a0e888c0037ee8ac9d49ba48294a9
     network_mode: host
     volumes:
       - ${APP_DATA_DIR}/data:/config

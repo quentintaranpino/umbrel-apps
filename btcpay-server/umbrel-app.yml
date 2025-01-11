@@ -2,7 +2,7 @@ manifestVersion: 1
 id: btcpay-server
 category: bitcoin
 name: BTCPay Server
-version: "1.12.5"
+version: "2.0.5"
 tagline: Accept Bitcoin payments with 0 fees & no 3rd party
 description: >-
   BTCPay Server is a payment processor that allows you to receive
@@ -33,16 +33,15 @@ gallery:
 path: ""
 defaultUsername: ""
 defaultPassword: ""
-releaseNotes: >
-  This update brings BTCPay Server to version 1.12.5, and includes various bug fixes, and improvements.
-
-
-  - Improved checkout page load time by fetching the recommended fee in the background periodically
-
-  - Improved fee rate approximation by linear interpolation between known block targets
-
-  - Hide LN Balance when using an internal node and not a server admin
-
+releaseNotes: >-
+  Highlights:
+    - Added QR Code support for store invitation emails.
+    - Introduced rate providers for Norwegian exchanges (Bitmynt and Bare Bitcoin).
+    - Improved store user management with enhanced API functionality and documentation.
+    - Admins can now view users’ invoices.
+    - Added a “Copy Link” button for pull payment actions.
+    - Enhanced UI consistency and plugin customization options.
+    - Various bug fixes.
 
   Full release notes can be found at https://github.com/btcpayserver/btcpayserver/releases.
 submitter: Umbrel

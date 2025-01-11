@@ -1,8 +1,8 @@
-manifestVersion: 1
+manifestVersion: 1.1
 id: core-lightning-rtl
 category: bitcoin
 name: Ride The Lightning (Core Lightning)
-version: "0.14.1-beta"
+version: "0.15.4-beta"
 tagline: Manage your Core Lightning node with RTL
 description: >-
   This version of RTL is specifically configured to use your Core Lightning node.
@@ -44,11 +44,11 @@ gallery:
 path: ""
 deterministicPassword: true
 releaseNotes: >-
-  - Bug fix to support forked core lightning versions on BTCPayserver
-  
-  - Default onchain address type is now P2TR (dependent on c-lightning-rest v0.10.7)
+  - Improved authentication logic for clearer error handling and validation during login and password reset processes
 
-  - and more!
+  - Refined application settings handling to ensure stricter validation of access keys
+
+  - Bug fixes
 
 
   Full release notes can be found here: https://github.com/Ride-The-Lightning/RTL/releases

@@ -2,7 +2,7 @@ manifestVersion: 1
 id: helipad
 category: bitcoin
 name: Helipad
-version: "0.1.11"
+version: "0.2.1"
 tagline: View boosts & boostagrams from Podcasting 2.0 apps
 description: Helipad shows boosts and boostagram messages coming in to your
   Lightning node from your listeners who are using Podcasting 2.0 apps.
@@ -24,14 +24,22 @@ submission: https://github.com/getumbrel/umbrel/pull/1174
 releaseNotes: >-
   This update includes the following improvements:
 
-  - Added missing User-Agent header when calling the Podcast Index API
+  - Add podcast filter
 
-  - Added reply boosts, sent tab, and password protection
+  - Add njump links for Nostr references and setting to resolve npubs to names
 
-  - Show automated boosts in the Boosts tab
+  - Add custom reports to settings page
 
-  - Added browser-based reply boosts (e.g. WebLN, Alby)
+  - Show hosted wallet info
 
-  - Added icons for LN Beats, Podcast Guru, and TrueFans
+  - Add icon for wherever.audio
 
-  - Added boosts, streams, and sent lists to CSV export and fixed positional params
+  - Format timestamp hover according to current locale
+
+  - Add ability to trigger webhooks on certain amounts
+
+  - Add a pew queue to make sure overlapping pews do not get skipped
+
+  - Fix reply boosts to handle empty wallet key/values and Fountain wallet ids
+
+  - Fix sound upload caching issues

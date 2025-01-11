@@ -8,7 +8,7 @@ services:
       PROXY_AUTH_WHITELIST: "/api/*"
 
   server:
-    image: fallenbagel/jellyseerr:1.7.0@sha256:6dcdb5ba50913a14b2bd7df6388607ce175121f3416679c2746501256ac9f075
+    image: fallenbagel/jellyseerr:2.2.3@sha256:a324fa4d81cce73116801bee3c50b632f3457c0ca0ad31aa692c640e22f50dea
     volumes:
       - ${APP_DATA_DIR}/data/config:/app/config
     restart: on-failure

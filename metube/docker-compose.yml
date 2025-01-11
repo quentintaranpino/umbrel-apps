@@ -7,7 +7,9 @@ services:
       APP_PORT: 8081
 
   metube:
-    image: ghcr.io/alexta69/metube:2024-01-26@sha256:7609e7dfe368dcff33263fbdca2a0fc4b44589da2b867a1d1b905f06aef97074
+    image: ghcr.io/alexta69/metube:2024-12-29@sha256:58986130d180dbdbce48273a0c1bbd6af33396c002c4ab59935ea7e0dbea4fbb
     restart: on-failure
     volumes:
       - ${UMBREL_ROOT}/data/storage/downloads/metube:/downloads
+    environment:
+      - DELETE_FILE_ON_TRASHCAN=true

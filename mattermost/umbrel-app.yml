@@ -1,0 +1,56 @@
+manifestVersion: 1
+id: mattermost
+name: Mattermost
+tagline: Team Chat, Open Source, Self-Hosted
+category: social
+version: "10.3.1"
+port: 8765
+description: >-
+  🚉 Mattermost is an open-source platform designed for secure collaboration throughout the software development lifecycle.
+
+
+  💬 It serves as a team messaging application that emphasizes developer productivity and the benefits of open-source software.
+
+
+  💾 Mattermost offers a self-hosted alternative to proprietary SaaS messaging services such as Slack and Microsoft Teams.
+
+
+  Note: Mattermost can be used locally within your network. However, if you want others outside your local network to access your server, you'll need to make it accessible on the public internet.
+  If you have a domain name, you can set this up using the Cloudflare Tunnel or Nginx Proxy Manager apps in the Umbrel Apps Store.
+developer: Mattermost
+website: https://mattermost.com
+submitter: al-lac
+submission: https://github.com/getumbrel/umbrel-apps/pull/1714
+repo: https://github.com/mattermost/mattermost
+support: https://forum.mattermost.com/
+gallery:
+  - 1.jpg
+  - 2.jpg
+  - 3.jpg
+defaultUsername: ""
+defaultPassword: ""
+dependencies: []
+releaseNotes: >-
+  Mattermost v10.3.1 and v10.3.0 contain multiple new features, improvements, and bug fixes.
+
+
+  Key Updates:
+
+  - New draft messages view
+
+  - Copilot plugin enabled by default
+
+  - Updated minimum Edge and Chrome versions to 130+
+
+  - Classic Mobile App deprecated—upgrade to v2 Mobile App
+
+
+  Fixes:
+
+  - Improved Desktop App performance, post drafts, and status syncing
+
+  - Fixed user status syncing and search input accessibility issues
+
+
+  Full release notes are available at https://docs.mattermost.com/about/mattermost-v10-changelog.html
+path: ""
